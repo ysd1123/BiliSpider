@@ -1,0 +1,33 @@
+'''
+内置 data() 函数，以字典形式返回参数 aid 所对应的Bilibili av号的视频数据。
+aid：av号
+view：播放
+danmaku：弹幕
+reply：评论
+favorite：收藏
+coin：投币
+share：分享
+now_rank：？
+his_rank：？
+like：点赞
+dislike：？
+no_reprint：？
+copyright：版权信息（1代表自制，2代表转载）
+'''
+
+import requests
+
+
+def data(aid):
+    url = 'https://api.bilibili.com/archive_stat/stat?aid='+str(aid)
+    av_data = requests.get(url)
+    av_data.encoding = 'utf-8'
+    dict_avdata = av_data.json()
+    if dict_avdata['code'] == 0:
+        return dict_avdata['data']
+    else:
+        return 'Video 404'
+
+
+if __name__ == "__main__":
+    pass
