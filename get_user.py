@@ -12,9 +12,12 @@ import requests
 
 def data(uuid):
     url = 'https://api.bilibili.com/x/relation/stat?vmid='+str(uuid)
-    user_data = requests.get(url)
+    headers = {
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'}
+    user_data = requests.get(url, headers=headers)
     user_data.encoding = 'utf-8'
     dict_userdata = user_data.json()
+
     if dict_userdata['code'] == 0:
         return dict_userdata['data']
     else:

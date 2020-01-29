@@ -20,9 +20,12 @@ import requests
 
 def data(aid):
     url = 'https://api.bilibili.com/archive_stat/stat?aid='+str(aid)
-    av_data = requests.get(url)
+    headers = {
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'}
+    av_data = requests.get(url, headers=headers)
     av_data.encoding = 'utf-8'
     dict_avdata = av_data.json()
+
     if dict_avdata['code'] == 0:
         return dict_avdata['data']
     else:
